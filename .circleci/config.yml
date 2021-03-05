@@ -9,7 +9,7 @@ jobs:
       - run: sleep 5
   test:
     docker:
-      - image: cimg/ruby:2.4.1
+      - image: circleci/ruby:2.4.1
     steps:
       - checkout
       - run: echo "A more familiar hi"
