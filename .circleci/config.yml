@@ -2,21 +2,24 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: cimg/ruby:2.4.1
     steps:
       - checkout
       - run: echo "A first hello"
       - run: sleep 5
-    test:
-      docker:
-        - image: circleci/ruby:2.4.1
-      steps:
-        - checkout
-        - run: echo "A more familiar hi"
-        - run: sleep 5
- workflows:
+  test:
+    docker:
+      - image: cimg/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "A more familiar hi"
+      - run: sleep 5
+workflows:
   version: 2
-  buiuld_and_test:
+  build_and_test:
     jobs:
       - build
-      - test
+      - test:
+          # only run this job if build succeeds
+          requires:
+            - build 
